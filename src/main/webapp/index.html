@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Diginide vaalikone</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css">
+        
+    </head>
+    <body>
+        <div id="container">
+            
+            <img id="headerimg" src="Logo.png" width="720" />
+            <div class="kysymys">
+                <h1>Vaalikone</h1>
+            </div>
+                <br>
+                                <form action="Vaalikone">
+                                <input id="submitnappi" type="submit" value="Aloita" name="btnAloita" />                   
+                                </form>
+                                
+                                <form action="Candidates" style="margin-left:300px; margin-top:50px;">
+								<h3>Add candidates answers:</h3>
+								Candidate id: <input type="number" name="candidateid" style="width=50;"><br>
+								<input type="submit" />
+								</form>
+								
+								<form action="Delete" style="margin-left:300px; margin-top:50px;">
+								<h3>Delete candidates answer:</h3>
+								Candidate id: <input type="number" name="candidateidd" style="width=50;"><br>																
+								Question id: &nbsp;&nbsp;<input type="number" name="questionidd" style="width=50;"><br>
+								<input type="submit" />
+								</form>
+								
+								<form action="Retrieve" style="margin-left:300px; margin-top:50px;">
+								<h3> Edit candidates answer:</h3>
+								Candidate id: <input type="number" name="candidateid" style="width=50;"><br>
+								Question id: &nbsp;&nbsp;<input type="number" name="questionid" style="width=50;"><br>
+								<input type="submit" />
+								</form>
+								
+								
+								<form action="AddCandidate" style="margin-left:300px; margin-top:50px;">
+								
+								<h3> Add candidate:</h3>
+								Candidate id: <input type="number" name="candidateid" style="width=50; text-align: right;"><br>
+								Candidate last name: <input type="text" name="candidatelname" style="width=50; text-align: right;"><br>
+								Candidate first name: <input type="text" name="candidatefname" style="width=50; text-align: right;"><br>
+								Candidate party: <input type="text" name="party" style="width=50; text-align: right;"><br>
+								Candidate home city: <input type="text" name="homecity" style="width=50; text-align: right;"><br>
+								Candidate age: <input type="number" name="age" style="width=50"><br>
+								Why to parliament: <input type="text" name="whytoparliament" style="width=50"><br>
+								What are the things you want to affect: <input type="text" name="whatarethethingsyouwanttoaffect" style="width=50"><br>
+								Candidate profession: <input type="text" name="profession" style="width=50"><br>
+								<input type="submit" name="submitBtn" value="Submit"/>
+								</form>
+ 
+           
+        </div>
+    </body>
+    <footer>
+    						
+    </footer>
+</html>
