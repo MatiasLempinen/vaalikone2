@@ -24,7 +24,7 @@ and open the template in the editor.
                                 <input id="submitnappi" type="submit" value="Aloita" name="btnAloita" />                   
                                 </form>
                                 
-                                      <form action="http://localhost:8080/rest/restitesti">
+                                      <form action="/rest/restitesti" style="margin-left:300px; margin-top:50px;">
          								<button type="submit">Restitesti</button>
       								</form>
                                 
@@ -34,12 +34,13 @@ and open the template in the editor.
 								<input type="submit" />
 								</form>
 								
-								<form action="Delete" style="margin-left:300px; margin-top:50px;">
+								<form action="/rest/deleteanswer" style="margin-left:300px; margin-top:50px;">
 								<h3>Delete candidates answer:</h3>
 								Candidate id: <input type="number" name="candidateidd" style="width=50;"><br>																
 								Question id: &nbsp;&nbsp;<input type="number" name="questionidd" style="width=50;"><br>
 								<input type="submit" />
 								</form>
+								
 								
 								<form action="Retrieve" style="margin-left:300px; margin-top:50px;">
 								<h3> Edit candidates answer:</h3>
