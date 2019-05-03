@@ -27,7 +27,7 @@
 
 </div>
 
-			<form action="Edit" style="margin-left:300px; margin-top:50px;">
+			<form action="/rest/editanswer" style="margin-left:300px; margin-top:50px;">
 			<p> Change answers:</p>
 			Answer (1-5)<input type="number" min="1" max="5" name="answer" value=${answer} style="width=50;"><br>
 			Comment: <textarea name="comment" rows="1" cols="50" maxlength="50">${comment}</textarea><br>
