@@ -46,6 +46,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	</classpathentry>
 	<classpathentry kind="output" path="target/vaalikone2-0.0.1-SNAPSHOT/WEB-INF/classes"/>
 </classpath>
