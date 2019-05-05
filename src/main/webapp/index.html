@@ -16,11 +16,11 @@ and open the template in the editor.
             	
                 //Collect input from html page
                 var answer = new Object();
-                answer.EHDOKAS_ID = document.getElementById("EHDOKAS_ID").value;
-                answer.KYSYMYS_ID = document.getElementById("KYSYMYS_ID").value;
+                answer.ehdokasId = document.getElementById("EHDOKAS_ID").value;
+                answer.kysymysId = document.getElementById("KYSYMYS_ID").value;
                 
                 var jsonAnswer = JSON.stringify(answer);
-                document.getElementById("deleteAnswerAJAX").innerHTML=jsonAnswer;
+                
                 
                 var xhttp = new XMLHttpRequest();
                                  
@@ -31,12 +31,14 @@ and open the template in the editor.
                 //Use the REST API response                                
                 xhttp.onreadystatechange = function(){
                 	if (this.readyState == 4 && this.status == 200){
-                		document.getElementById("deleteAnswerAJAX1").innerHTML=this.responseText;
+                		
                 		var palautettu=JSON.parse(this.responseText);
-                		document.getElementById("deleteAnswerAJAX2").innerHTML="EHDOKAS_ID="+palautettu.EHDOKAS_ID+" candidateid="+palautettu.KYSYMYS_ID;
+                		document.getElementById("deleteAnswerAJAX").innerHTML="You have removed answer from candidate: "+palautettu.ehdokasId+" to question: "+palautettu.kysymysId;
+                		
                 	}
                 	else{
-                		document.getElementById("deleteAnswerAJAX2").innerHTML=xhttp.status;
+                		document.getElementById("deleteAnswerAJAX").innerHTML=xhttp.response;
+                		
                 	}
                 }
             }
@@ -71,9 +73,8 @@ and open the template in the editor.
 								Question id: &nbsp;&nbsp;<input type="number" name="KYSYMYS_ID" id="KYSYMYS_ID" style="width=50;"><br>
 								<input type="button" value="Delete Answer" onclick="deleteAnswer()" />
 								</form>
-								<div id="deleteAnswerAJAX"></div>
-								<div id="deleteAnswerAJAX1"></div>
-								<div id="deleteAnswerAJAX2"></div>
+								<div id="deleteAnswerAJAX" style="margin-left:300px; margin-top:20px;"></div>
+
 								
 								<form action="/rest/deletecandidate" style="margin-left:300px; margin-top:50px;"><br>
 								<h3>Delete candidate:</h3>
