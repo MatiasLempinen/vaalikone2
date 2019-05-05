@@ -10,6 +10,37 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style.css" rel="stylesheet" type="text/css">
+          	<script lang="javascript">
+            function deleteAnswer()
+            {
+            	
+                //Collect input from html page
+                var answer = new Object();
+                answer.EHDOKAS_ID = document.getElementById("EHDOKAS_ID").value;
+                answer.KYSYMYS_ID = document.getElementById("KYSYMYS_ID").value;
+                
+                var jsonAnswer = JSON.stringify(answer);
+                document.getElementById("deleteAnswerAJAX").innerHTML=jsonAnswer;
+                
+                var xhttp = new XMLHttpRequest();
+                                 
+				xhttp.open("POST", "./rest/deleteanswer/", true);
+				xhttp.setRequestHeader("Content-Type", "application/json");
+				xhttp.send(jsonAnswer);
+				
+                //Use the REST API response                                
+                xhttp.onreadystatechange = function(){
+                	if (this.readyState == 4 && this.status == 200){
+                		document.getElementById("deleteAnswerAJAX1").innerHTML=this.responseText;
+                		var palautettu=JSON.parse(this.responseText);
+                		document.getElementById("deleteAnswerAJAX2").innerHTML="EHDOKAS_ID="+palautettu.EHDOKAS_ID+" candidateid="+palautettu.KYSYMYS_ID;
+                	}
+                	else{
+                		document.getElementById("deleteAnswerAJAX2").innerHTML=xhttp.status;
+                	}
+                }
+            }
+        </script>
         
     </head>
     <body>
@@ -34,12 +65,15 @@ and open the template in the editor.
 								<input type="submit" />
 								</form>
 								
-								<form action="/rest/deleteanswer" style="margin-left:300px; margin-top:50px;">
+								<form method="post" style="margin-left:300px; margin-top:50px;">
 								<h3>Delete candidates answer:</h3>
-								Candidate id: <input type="number" name="candidateidd" style="width=50;"><br>																
-								Question id: &nbsp;&nbsp;<input type="number" name="questionidd" style="width=50;"><br>
-								<input type="submit" />
+								Candidate id: <input type="number" name="EHDOKAS_ID" id="EHDOKAS_ID" style="width=50;"><br>																
+								Question id: &nbsp;&nbsp;<input type="number" name="KYSYMYS_ID" id="KYSYMYS_ID" style="width=50;"><br>
+								<input type="button" value="Delete Answer" onclick="deleteAnswer()" />
 								</form>
+								<div id="deleteAnswerAJAX"></div>
+								<div id="deleteAnswerAJAX1"></div>
+								<div id="deleteAnswerAJAX2"></div>
 								
 								<form action="/rest/deletecandidate" style="margin-left:300px; margin-top:50px;"><br>
 								<h3>Delete candidate:</h3>

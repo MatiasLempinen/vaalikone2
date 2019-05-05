@@ -11,8 +11,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
 
 import persist.Vastaukset;
 import persist.VastauksetPK;
@@ -20,11 +22,12 @@ import persist.VastauksetPK;
  
 @Path("/deleteanswer")
 public class DeleteAnswer {
- 
-	@GET
-	public String delete (
-			@QueryParam("candidateidd") int candidateidd,
-			@QueryParam("questionidd") int questionidd)						
+	
+
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public VastauksetPK poistaVastaus(VastauksetPK v)					
 			{                
       
         EntityManagerFactory emf=null;
@@ -32,23 +35,22 @@ public class DeleteAnswer {
   	    emf=Persistence.createEntityManagerFactory("vaalikones");
   	    em = emf.createEntityManager();
 
-        try {
+
         	
-        	VastauksetPK answerPK = new VastauksetPK(candidateidd,questionidd);
-        	Vastaukset answer = em.find(Vastaukset.class, answerPK);
+        	VastauksetPK vastausPK = new VastauksetPK(v.getEhdokasId(),v.getKysymysId());
+        	Vastaukset vastaus = em.find(Vastaukset.class, vastausPK);
         	
         	em.getTransaction().begin();
-     		em.remove(answer);
+     		em.remove(vastaus);
      		em.getTransaction().commit();
      		em.close();
      		
      		
              
-        } catch (Exception e) {
-        	
-        }
-		return "You have removed candidate " + candidateidd + "'s" +" answer to question " + questionidd;
-        
+
+		return v;
+		
+		
 
 	}
 	
