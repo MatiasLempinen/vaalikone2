@@ -17,19 +17,17 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import persist.Answer;
 import persist.Vastaukset;
 import persist.VastauksetPK;
 
 @Path("/editanswer")
 public class EditAnswer {
 	
-	@GET
-	@Produces(MediaType.TEXT_HTML)
-	public String delete (
-			@QueryParam("candidateid") int candidateID,
-			@QueryParam("answer") int answer,
-			@QueryParam("comment") String comment,
-			@QueryParam("q") int questionID)						
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Answer muokkaaVastaus(Answer a)					
 			{                
       
         EntityManagerFactory emf=null;
@@ -39,12 +37,12 @@ public class EditAnswer {
 
         try {
         	
-        	VastauksetPK answerPK = new VastauksetPK(candidateID,questionID);
-        	Vastaukset answer1 = em.find(Vastaukset.class, answerPK);
+        	VastauksetPK vastausPK = new VastauksetPK(a.getEhdokasid(),a.getKysymysid());
+        	Vastaukset vastaus = em.find(Vastaukset.class, vastausPK);
         	
             em.getTransaction().begin();
-    		answer1.setVastaus(answer);
-    		answer1.setKommentti(comment);
+    		vastaus.setVastaus(a.getVastaus());
+    		vastaus.setKommentti(a.getKommentti());
             em.getTransaction().commit();
      		
      		
@@ -52,8 +50,9 @@ public class EditAnswer {
         } catch (Exception e) {
         	
         }
-		return "<p>" + "You changed answer from candidate " + candidateID + " to question nro " + questionID +  " to: " + answer + " and the comment to: " + comment + "</p>"
-				+ "<a href=\"http://localhost:8080/index.html\">Go back to start</a>";
+		//return "<p>" + "You changed answer from candidate " + candidateID + " to question nro " + questionID +  " to: " + answer + " and the comment to: " + comment + "</p>"
+				//+ "<a href=\"http://localhost:8080/index.html\">Go back to start</a>";
+		return a;
         
 
 	}
