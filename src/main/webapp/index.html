@@ -74,13 +74,7 @@ and open the template in the editor.
 								<input type="button" value="Delete Answer" onclick="deleteAnswer()" />
 								</form>
 								<div id="deleteAnswerAJAX" style="margin-left:300px; margin-top:20px;"></div>
-
 								
-								<form action="/rest/deletecandidate" style="margin-left:300px; margin-top:50px;"><br>
-								<h3>Delete candidate:</h3>
-								Candidate id: <input type="number" name="candidateidd" style="width=50;"><br>
-								<input type="submit" />
-								</form>
 								
 								<form action="Retrieve" style="margin-left:300px; margin-top:50px;">
 								<h3> Edit candidates answer:</h3>
@@ -104,7 +98,12 @@ and open the template in the editor.
 								Candidate profession: <input type="text" name="profession" style="width=50"><br>
 								<input type="submit" name="submitBtn" value="Submit"/>
 								</form>
- 
+ 								
+ 								<form action="/rest/deletecandidate" style="margin-left:300px; margin-top:50px;"><br>
+								<h3>Delete candidate:</h3>
+								Candidate id: <input type="number" name="candidateidd" style="width=50;"><br>
+								<input type="submit" />
+								</form>
            
         </div>
     </body>

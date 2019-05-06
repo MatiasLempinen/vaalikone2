@@ -8,17 +8,15 @@ package vaalikone;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.annotation.Resource;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.appengine.api.utils.SystemProperty;
 
 import persist.Ehdokkaat;
 import persist.Kysymykset;
@@ -66,7 +63,7 @@ public class Vaalikone extends HttpServlet {
         //jos kÃ¤yttÃ¤jÃ¤-oliota ei lÃ¶ydy sessiosta, luodaan sinne sellainen
         if (usr == null) {
             usr = new Kayttaja();
-            logger.log(Level.FINE, "Luotu uusi käyttäjäolio");
+            logger.log(Level.FINE, "Luotu uusi kï¿½yttï¿½jï¿½olio");
             session.setAttribute("usrobj", usr);
         }
         EntityManagerFactory emf=null;
