@@ -23,7 +23,8 @@ and open the template in the editor.
                 
                 
                 var xhttp = new XMLHttpRequest();
-                                 
+                
+                //send information to REST
 				xhttp.open("POST", "./rest/deleteanswer/", true);
 				xhttp.setRequestHeader("Content-Type", "application/json");
 				xhttp.send(jsonAnswer);
@@ -57,10 +58,6 @@ and open the template in the editor.
                                 <input id="submitnappi" type="submit" value="Aloita" name="btnAloita" />                   
                                 </form>
                                 
-                                      <form action="/rest/restitesti" style="margin-left:300px; margin-top:50px;">
-         								<button type="submit">Restitesti</button>
-      								</form>
-                                
                                 <form action="Candidates" style="margin-left:300px; margin-top:50px;">
 								<h3>Add candidates answers:</h3>
 								Candidate id: <input type="number" name="candidateid" style="width=50;"><br>
@@ -73,6 +70,7 @@ and open the template in the editor.
 								Question id: &nbsp;&nbsp;<input type="number" name="KYSYMYS_ID" id="KYSYMYS_ID" style="width=50;"><br>
 								<input type="button" value="Delete Answer" onclick="deleteAnswer()" />
 								</form>
+								
 								<div id="deleteAnswerAJAX" style="margin-left:300px; margin-top:20px;"></div>
 								
 								

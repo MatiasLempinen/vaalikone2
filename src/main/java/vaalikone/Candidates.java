@@ -24,12 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
 import persist.Answer;
 import persist.Ehdokkaat;
 import persist.Kysymykset;
-import persist.Vastaukset;
 
 /**
  *

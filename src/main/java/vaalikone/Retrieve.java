@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import persist.Answer;
-import persist.Ehdokkaat;
 import persist.Kysymykset;
 import persist.Vastaukset;
 import persist.VastauksetPK;
