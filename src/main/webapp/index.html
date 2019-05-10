@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<!--
+<!DOCTYPE html><!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
@@ -10,7 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style.css" rel="stylesheet" type="text/css">
-          	<script lang="javascript">
+          	<script>
             function deleteAnswer()
             {
             	
@@ -23,8 +22,7 @@ and open the template in the editor.
                 
                 
                 var xhttp = new XMLHttpRequest();
-                
-                //send information to REST
+                                 
 				xhttp.open("POST", "./rest/deleteanswer/", true);
 				xhttp.setRequestHeader("Content-Type", "application/json");
 				xhttp.send(jsonAnswer);
@@ -43,6 +41,91 @@ and open the template in the editor.
                 	}
                 }
             }
+            
+            function addCandidate() {
+            	// Collect input from html page
+            	
+            	var ehdokas = new Object();
+            	var lom = document.getElementById("lisayslomake");
+            	ehdokas.ehdokasId = lom.candidateid.value;
+            	ehdokas.sukunimi = lom.candidatelname.value;
+            	ehdokas.etunimi = lom.candidatefname.value;
+            	ehdokas.puolue = lom.party.value;
+            	ehdokas.kotipaikkakunta = lom.homecity.value;
+            	ehdokas.ika = lom.age.value;
+            	ehdokas.miksiEduskuntaan = lom.whytoparliament.value;
+            	ehdokas.mitaAsioitaHaluatEdistaa = lom.whatarethethingsyouwanttoaffect.value;
+            	ehdokas.ammatti = lom.profession.value;
+            	
+            	var jsonAnswer = JSON.stringify(ehdokas);
+            	
+            	var xhttp = new XMLHttpRequest();
+            	
+            	xhttp.open("POST", "./rest/addcandidaterest/add/", true);
+            	
+            	xhttp.setRequestHeader("Content-Type", "application/json");
+            	
+            	xhttp.send(jsonAnswer);
+            	
+            	xhttp.onreadystatechange = function() {
+            		if (this.readyState == 4 && this.status == 200) {
+/*             			var palautettu = JSON.parse(this.responseText);
+            			lom.EHDOKAS_ID.value = palautettu.EHDOKAS_ID;
+ */            			document.getElementById("addCandidateAJAX").innerHTML = "You have added a candidate with the following information " + this.responseText + ".";
+            			
+            		}
+            	}
+            	
+/* 				Candidate id: <input type="number" name="EHDOKAS_ID2" id="EHDOKAS_ID2" style="width=50; text-align: right;"><br>
+				Candidate last name: <input type="text" name="candidatelname" style="width=50; text-align: right;"><br>
+				Candidate first name: <input type="text" name="candidatefname" style="width=50; text-align: right;"><br>
+				Candidate party: <input type="text" name="party" style="width=50; text-align: right;"><br>
+				Candidate home city: <input type="text" name="homecity" style="width=50; text-align: right;"><br>
+				Candidate age: <input type="number" name="age" style="width=50"><br>
+				Why to parliament: <input type="text" name="whytoparliament" style="width=50"><br>
+				What are the things you want to affect: <input type="text" name="whatarethethingsyouwanttoaffect" style="width=50"><br>
+				Candidate profession: <input type="text" name="profession" style="width=50"><br>
+ */            	
+             //   window.alert(jsonAnswer);	
+            	
+            	
+            	// Use the REST API response
+            	
+            }
+            
+            function deleteCandidate() {
+            	// Collect input from html page
+            	
+            	var ehdokas = new Object();
+            	var lom2 = document.getElementById("poistolomake");
+            	ehdokas.ehdokasId = lom2.candidateid.value;
+            	
+            	var jsonAnswer = JSON.stringify(ehdokas);
+            	
+            	var xhttp = new XMLHttpRequest();
+            	
+            	xhttp.open("POST", "./rest/deletecandidate/delete/", true);
+            	
+            	xhttp.setRequestHeader("Content-Type", "application/json");
+            	
+            	xhttp.send(jsonAnswer);
+            	
+            	xhttp.onreadystatechange = function() {
+            		if (this.readyState == 4 && this.status == 200) {
+            		//	var palautettu = JSON.parse(this.responseText);
+            			document.getElementById("deleteCandidateAJAX").innerHTML = "You have deleted the candidate with an id of " + jsonAnswer + ".";
+            			/*var palautettuLista = JSON.parse(this.responseText);
+                    	for (int i = 0; i < palautettuLista.length; i++) {
+                    		var e = palautettuLista[i];
+                    		document.getElementById("listCandidatesAJAX").innerHTML = e.ehdokasId + e.sukunimi + e.etunimi;
+                    	}
+                    	*/
+            		} else {
+            			document.getElementById("deleteCandidateAJAX").innerHTML = xhttp.response;
+            		}
+            	}
+            	//window.alert(jsonAnswer);
+            }
         </script>
         
     </head>
@@ -57,6 +140,7 @@ and open the template in the editor.
                                 <form action="Vaalikone">
                                 <input id="submitnappi" type="submit" value="Aloita" name="btnAloita" />                   
                                 </form>
+
                                 
                                 <form action="Candidates" style="margin-left:300px; margin-top:50px;">
 								<h3>Add candidates answers:</h3>
@@ -70,7 +154,6 @@ and open the template in the editor.
 								Question id: &nbsp;&nbsp;<input type="number" name="KYSYMYS_ID" id="KYSYMYS_ID" style="width=50;"><br>
 								<input type="button" value="Delete Answer" onclick="deleteAnswer()" />
 								</form>
-								
 								<div id="deleteAnswerAJAX" style="margin-left:300px; margin-top:20px;"></div>
 								
 								
@@ -82,10 +165,10 @@ and open the template in the editor.
 								</form>
 								
 								
-								<form action="AddCandidate" style="margin-left:300px; margin-top:50px;">
+								<form onsubmit="return false;" id="lisayslomake" method="post" style="margin-left:300px; margin-top:50px;">
 								
 								<h3> Add candidate:</h3>
-								Candidate id: <input type="number" name="candidateid" style="width=50; text-align: right;"><br>
+								Candidate id: <input type="number" name="candidateid" id="candidateid" style="width=50; text-align: right;"><br>
 								Candidate last name: <input type="text" name="candidatelname" style="width=50; text-align: right;"><br>
 								Candidate first name: <input type="text" name="candidatefname" style="width=50; text-align: right;"><br>
 								Candidate party: <input type="text" name="party" style="width=50; text-align: right;"><br>
@@ -94,14 +177,21 @@ and open the template in the editor.
 								Why to parliament: <input type="text" name="whytoparliament" style="width=50"><br>
 								What are the things you want to affect: <input type="text" name="whatarethethingsyouwanttoaffect" style="width=50"><br>
 								Candidate profession: <input type="text" name="profession" style="width=50"><br>
+								<!-- 
 								<input type="submit" name="submitBtn" value="Submit"/>
+								-->
+								<input type="button" value="Add Candidate" onclick="addCandidate()" />
 								</form>
+								<div id="addCandidateAJAX" style="margin-left:300px; margin-top:20px;"></div>
  								
- 								<form action="/rest/deletecandidate" style="margin-left:300px; margin-top:50px;"><br>
+ 								<form method="post" id="poistolomake" style="margin-left:300px; margin-top:50px;"><br>
 								<h3>Delete candidate:</h3>
-								Candidate id: <input type="number" name="candidateidd" style="width=50;"><br>
-								<input type="submit" />
+								Candidate id: <input type="number" name="candidateid" id="candidateid" style="width=50;"><br>
+								<input type="button" value="Delete Candidate" onclick="deleteCandidate()" />
 								</form>
+								<div id="deleteCandidateAJAX" style="margin-left:300px; margin-top:0px;"></div>
+								
+								<div id="listCandidatesAJAX" style="margin-left;300px; margin-top:0px;"></div>
            
         </div>
     </body>
